@@ -7,10 +7,13 @@ export interface Message extends Document {
 }
 
 const MessageSchema: Schema<Message> = new Schema({
-  content: { type: String, required: true },
+  content:
+   { type: String, required: true },
   createdAt: { type: Date, required: true, default: Date.now },
 });
 
+
+// here it define the schema of the user 
 /* User types + schema */
 export interface User extends Document {
   username: string;
