@@ -13,9 +13,11 @@ export const authOptions: NextAuthOptions = {
         username: { label: "Email or Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
+      
       async authorize(credentials: any): Promise<any> {
         // 1. Connect to database
         await dbconnect();
+
 
         try {
           // 2. Find user by email OR username
@@ -80,6 +82,8 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+
+  // runs where the usesession() is called
 
   pages: {
     signIn: "/sign-in", // custom login page

@@ -13,3 +13,5 @@ export default function AuthProvider({
     </SessionProvider>
   );
 }
+
+// this session provider contain the details of the user as in session based token in option.ts file
