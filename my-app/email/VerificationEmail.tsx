@@ -24,7 +24,10 @@ export default function VerificationEmail({ username, otp }: VerificationEmailPr
         <Font
           fontFamily="Roboto"
           fallbackFontFamily="Verdana"
-          url="https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2"
+          webFont={{
+            url:"https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2",
+            format:'woff2',
+          }}
         />
       </Head>
 
