@@ -1,11 +1,14 @@
 
 import mongoose, { Schema, Document } from 'mongoose';
 
+// this is the interface of the message..
+// it show how the msg looks like it only done in typescript..
 export interface Message extends Document {
   content: string;
   createdAt: Date;
 }
 
+// this is the schema of the message 
 const MessageSchema: Schema<Message> = new mongoose.Schema({
   content: {
     type: String,
@@ -18,6 +21,7 @@ const MessageSchema: Schema<Message> = new mongoose.Schema({
   },
 });
 
+// interface of the User
 export interface User extends Document {
   username: string;
   email: string;
@@ -29,7 +33,7 @@ export interface User extends Document {
   messages: Message[];
 }
 
-// Updated User schema
+//  User schema
 const UserSchema: Schema<User> = new mongoose.Schema({
   username: {
     type: String,
