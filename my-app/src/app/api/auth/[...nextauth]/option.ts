@@ -5,6 +5,10 @@ import bcrypt from 'bcryptjs';
 import dbconnect from '@/Lib/dbconnect';
 import UserModel from '@/Lib/Models/User';
 
+
+// for the nextauth you must have folder structure /api/auth/[..nextauth]  and create the two files in it option.ts and route.ts
+// it is the most complex for the authroziation require both email and password 
+// this is the basic code for the custom method
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -14,6 +18,9 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
+
+      // authrize function for the authorization
+      // this method  will return the user from the database 
       async authorize(credentials: any): Promise<any> {
         await dbconnect();
         try {
@@ -23,19 +30,25 @@ export const authOptions: NextAuthOptions = {
               { username: credentials.identifier },
             ],
           });
+          // if the user is not there
           if (!user) {
             throw new Error('No user found with this email');
           }
+          // if the user is not verified
           if (!user.isVerified) {
             throw new Error('Please verify your account before logging in');
           }
+          // compare the password
           const isPasswordCorrect = await bcrypt.compare(
             credentials.password,
             user.password
           );
+          // if the password is corrected else not corrected 
           if (isPasswordCorrect) {
             return user;
-          } else {
+          } 
+          else 
+            {
             throw new Error('Incorrect password');
           }
         } catch (err: any) {
@@ -44,9 +57,15 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+
+// user come from above method so we have token and user data in jwt
+// token contain all the data so instead of fecting data from db get the data from the token
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
+      // get the data from the user into the token 
+      // store data from the user into the token 
+      if (user) 
+        {
         token._id = user._id?.toString(); // Convert ObjectId to string
         token.isVerified = user.isVerified;
         token.isAcceptingMessages = user.isAcceptingMessages;
@@ -55,6 +74,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
+      // get the data from the token into the session and exposes it to the frontend 
       if (token) {
         session.user._id = token._id;
         session.user.isVerified = token.isVerified;
@@ -64,6 +84,7 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+  // in this we have the session which is jwt based not database based means it will take the data from the jwt and export to the frontend
   session: {
     strategy: 'jwt',
   },

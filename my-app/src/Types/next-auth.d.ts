@@ -1,6 +1,8 @@
 
 import 'next-auth';
 
+// this file is being created for the modify in the existing models mainly modify users models 
+// here we have declare the session
 declare module 'next-auth' {
   interface Session {
     user: {
@@ -19,6 +21,7 @@ declare module 'next-auth' {
   }
 }
 
+// declare the JWT
 declare module 'next-auth/jwt' {
   interface JWT {
     _id?: string;
