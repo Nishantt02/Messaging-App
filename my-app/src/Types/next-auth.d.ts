@@ -3,6 +3,7 @@ import 'next-auth';
 
 // this file is being created for the modify in the existing models mainly modify users models 
 // here we have declare the session
+// it is being modify for the authoptions
 declare module 'next-auth' {
   interface Session {
     user: {
