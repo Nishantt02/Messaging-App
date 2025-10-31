@@ -7,10 +7,11 @@ export async function POST(request: Request) {
   await dbconnect();
 
   try {
+    // find the username and code 
     const { username, code } = await request.json();
     const decodedUsername = decodeURIComponent(username);
     const user = await UserModel.findOne({ username: decodedUsername });
-
+// if user is not found 
     if (!user) {
       return Response.json(
         { success: false, message: 'User not found' },
@@ -22,6 +23,7 @@ export async function POST(request: Request) {
     const isCodeValid = user.verifyCode === code;
     const isCodeNotExpired = new Date(user.verifyCodeExpiry) > new Date();
 
+    // if both thing are corrected then update user is verified.
     if (isCodeValid && isCodeNotExpired) {
       // Update the user's verification status
       user.isVerified = true;

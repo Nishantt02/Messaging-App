@@ -21,7 +21,7 @@ declare module 'next-auth' {
   }
 }
 
-// declare the JWT
+// declare the JWT modification
 declare module 'next-auth/jwt' {
   interface JWT {
     _id?: string;

@@ -1,4 +1,3 @@
-
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
@@ -64,7 +63,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       // get the data from the user into the token 
       // store data from the user into the token 
-      if (user) 
+      if (user) // check if user exist
         {
         token._id = user._id?.toString(); // Convert ObjectId to string
         token.isVerified = user.isVerified;

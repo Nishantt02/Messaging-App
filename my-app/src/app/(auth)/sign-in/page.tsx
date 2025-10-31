@@ -1,10 +1,12 @@
 'use client'
 import { useSession, signIn, signOut } from "next-auth/react"
 
+// here we get the data from the session by using the usesession
 export default function Component()
  {
   const { data: session } = useSession()
-  if (session) {
+  if (session) 
+    {
     return (
       <>
         Signed in as {session.user.email} <br />
