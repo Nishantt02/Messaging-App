@@ -68,9 +68,10 @@ export async function GET(request:Request){
         {status:401})
      }
      const userId=user._id || user.id; // get the userid from the user
+      const founduser=await UserModel.findById(userId)
      try {
         // find the user by userid
-        const founduser=await UserModel.findById(userId)
+       
         if(!founduser){
            return Response.json({
                success:false,
