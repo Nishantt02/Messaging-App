@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth"; // used to access user from session
-import dbconnect from "@/Lib/dbconnect";
-import UserModel from "@/Lib/Models/User";
+import dbconnect from "@/lib/dbconnect";
+import UserModel from "@/lib/Models/User";
 import { authOptions } from "../auth/[...nextauth]/option";
 import mongoose from "mongoose";
 
@@ -14,7 +14,7 @@ export async function GET(request:Request) {
             message:"user not found"
         },{status:404})
     }
-    const userid= new mongoose.Types.ObjectId(user._id) //convert id into mongoose obejct id
+    const userid= new mongoose.Types.ObjectId(user._id) //convert id into mongoose object id
     try {
         const user = await UserModel.aggregate([
       { $match: { _id: userid } }, //Pick your box (your user).

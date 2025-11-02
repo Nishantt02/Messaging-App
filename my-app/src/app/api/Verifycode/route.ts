@@ -1,6 +1,6 @@
 
-import dbconnect from "@/Lib/dbconnect";
-import UserModel from "@/Lib/Models/User";
+import dbconnect from "@/lib/dbconnect";
+import UserModel from "@/lib/Models/User";
 
 export async function POST(request: Request) 
 {

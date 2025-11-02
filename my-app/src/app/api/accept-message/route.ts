@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth"; // used to access user from session
-import dbconnect from "@/Lib/dbconnect";
-import UserModel from "@/Lib/Models/User";
+import dbconnect from "@/lib/dbconnect";
+import UserModel from "@/lib/Models/User";
 import { authOptions } from "../auth/[...nextauth]/option";
 
 // post request and the main purpose of this code is to enable and disable of accepting message
@@ -17,7 +17,7 @@ export async function POST(request:Request){
         {status:401})
      }
      const userId=user._id || user.id; // get the userid from the user
-     const{acceptingMessages}=await request.json();
+     const{acceptingMessages}=await request.json();// from the frontend data recieve
 
      try {
         const updateUser=await UserModel.findByIdAndUpdate(
@@ -54,7 +54,7 @@ export async function POST(request:Request){
 }
 
 //it is the get request for the getting of the status.
-// of enable and diable wheater it is enable or diable
+// of enable and diable wheater it is enable or disable
 export async function GET(request:Request){
      await dbconnect();
     const session=await getServerSession(authOptions); // here get the session and data in session
