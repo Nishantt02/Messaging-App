@@ -19,6 +19,7 @@ await dbconnect();
     // validate with zod
     const result= UsernameQuerySchema.safeParse(queryParams);
     console.log(result);
+    // is the result is not true
     if(!result.success){
       const usernameErrors=result.error.format().username?._errors || []
       return Response.json(
