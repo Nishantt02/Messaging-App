@@ -19,6 +19,7 @@ export async function POST(request: Request) {
       isVerified: true,
     });
 
+    // if the username is alreadt exsit then return false
     if (existingVerifiedUserByUsername) {
       return Response.json(
         {
@@ -110,3 +111,6 @@ else {
   }
 }
 
+export async function GET() {
+  return NextResponse.json({ message: "Only POST method allowed" }, { status: 405 });
+}
