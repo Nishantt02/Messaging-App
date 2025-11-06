@@ -26,7 +26,7 @@ import { Button } from "@/components/ui/button"
   const router=useRouter()
 
   // usecallback works on the function to delays
-  const debounceusername= useDebounceCallback(setUsername,3000) 
+const debounceusername= useDebounceCallback(setUsername,3000) 
   //it will send the request to backend at every 3 sec to avoid traffic for checking the uniqueness of the username
 // zod implemention checking the zod validation and default value of the feilds 
 const form=useForm({
@@ -51,7 +51,7 @@ const checkusernameuniqueness=async()=>{
      console.log(response.data.message);
     //  setUsernamemessage(response.data.message)
     let message=response.data.message
-    setUsernamemessage(message);
+    setUsernamemessage(message);  // here send the message to the username...
 
     } catch (error) {
       const axiosError=error as AxiosError<ApiResponse>
@@ -73,14 +73,14 @@ checkusernameuniqueness()
 const onSubmit = async (data: z.infer<typeof signupSchema>) => //zod validation in data it contain all fields
   { 
   // handle signup logic here for the submitting of the form 
-  setIssubmitting(true)
+  setIssubmitting(true) // here it is true means it is submitting the form
   try {
-    console.log(data);
     const response=await axios.post(`/api/sign-up`,data)
     console.log(response)
      toast.success(response.data.message || "Signup successful! 🎉")
-    router.replace(`/verify/${data.username}`)//navigate to the verifying page and verify otp.username is send to verify particular username
-    setIssubmitting(false)
+    router.replace(`/verify/${data.username}`)
+    //navigate to the verifying page and it is added in the url which username is need to verify
+    setIssubmitting(false) // form submitted so false
   } 
     catch (error) 
     {
@@ -90,12 +90,7 @@ const onSubmit = async (data: z.infer<typeof signupSchema>) => //zod validation 
        toast.error(errormessage)
       setIssubmitting(false);
     }
-  
-
-
 };
-
-
 
  return (
     <div className="flex justify-center items-center min-h-screen bg-gray-800">
@@ -106,6 +101,7 @@ const onSubmit = async (data: z.infer<typeof signupSchema>) => //zod validation 
           </h1>
           <p className="mb-4">Sign up to start your anonymous adventure</p>
         </div>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 {/* this is the form field for the username  */}
@@ -194,6 +190,3 @@ const onSubmit = async (data: z.infer<typeof signupSchema>) => //zod validation 
 
 export default page
 
-function useDebounceValue(username: string, arg1: number): [any] {
-    throw new Error("Function not implemented.")
-}

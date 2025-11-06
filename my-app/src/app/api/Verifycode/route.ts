@@ -8,10 +8,10 @@ export async function POST(request: Request)
   await dbconnect();
 
   try {
-    // find the username and code 
+    // frontend required the username and code from the fronted
     const { username, code } = await request.json();
     const decodedUsername = decodeURIComponent(username);
-    const user = await UserModel.findOne({ username: decodedUsername });
+    const user = await UserModel.findOne({ username: decodedUsername }); // find the user by the username 
 // if user is not found 
     if (!user) {
       return Response.json(
@@ -21,6 +21,7 @@ export async function POST(request: Request)
     }
 
     // Check if the code is correct and not expired
+    // check the frontend and backend code 
     const isCodeValid = user.verifyCode === code;
     const isCodeNotExpired = new Date(user.verifyCodeExpiry) > new Date();
 
@@ -44,7 +45,7 @@ export async function POST(request: Request)
         },
         { status: 400 }
       );
-    } else {
+    } else if(!isCodeValid) {
       // Code is incorrect
       return Response.json(
         { success: false, message: 'Incorrect verification code' },
