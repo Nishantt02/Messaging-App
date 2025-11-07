@@ -22,8 +22,18 @@ export async function POST(request: Request)
 
     // Check if the code is correct and not expired
     // check the frontend and backend code 
-    const isCodeValid = user.verifyCode === code;
-    const isCodeNotExpired = new Date(user.verifyCodeExpiry) > new Date();
+    // const isCodeValid = user.verifyCode === code;
+    // const isCodeNotExpired = new Date(user.verifyCodeExpiry) > new Date();
+    const isCodeValid = String(user.verifyCode).trim() === String(code).trim();
+const isCodeNotExpired = new Date(user.verifyCodeExpiry) > new Date();
+// console.log("Decoded username:", decodedUsername);
+// console.log("Found user:", user?.username);
+// console.log("User verify code:", user?.verifyCode);
+// console.log("Entered code:", code);
+// console.log("Match:", String(user.verifyCode) === String(code));
+// console.log("Expiry valid:", isCodeNotExpired);
+
+
 
     // if both thing are corrected then update user is verified.
     if (isCodeValid && isCodeNotExpired) {
@@ -45,13 +55,15 @@ export async function POST(request: Request)
         },
         { status: 400 }
       );
-    } else if(!isCodeValid) {
+    } else {
       // Code is incorrect
       return Response.json(
         { success: false, message: 'Incorrect verification code' },
         { status: 400 }
       );
     }
+  
+
   } catch (error) {
     console.error('Error verifying user:', error);
     return Response.json(

@@ -22,7 +22,6 @@ import { Button } from "@/components/ui/button"
   const[usernamemessage,setUsernamemessage]=useState('');
   const[ischeckingUsername,setIscheckingUsername]=useState(false)
   const[issubmitting,setIssubmitting]=useState(false)
-  // const{toast}=useToast()
   const router=useRouter()
 
   // usecallback works on the function to delays
@@ -31,7 +30,7 @@ const debounceusername= useDebounceCallback(setUsername,3000)
 // zod implemention checking the zod validation and default value of the feilds 
 const form=useForm({
   resolver:zodResolver(signupSchema),
-  // set the bydefault values 
+  // set the default values 
   defaultValues:{
     username:"",
     email:'',

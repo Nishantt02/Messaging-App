@@ -1,16 +1,12 @@
 "use client"
 import { verifyschema } from '@/Schema/Verifyschema';
-
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useParams } from 'next/navigation';  // use to extract the data from the dynamic url
 import React from 'react'
 import { useRouter } from 'next/navigation';
-
 import { useForm } from 'react-hook-form';
 import { Toaster,toast } from 'sonner';
 import * as z from 'zod';
-
 import axios, { AxiosError } from 'axios';
 import { ApiResponse } from '@/Types/Apiresponse';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -18,14 +14,12 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 const VerifyAcccount=()=>
 {
-    const router=useRouter();
+    const router=useRouter();  // used for the navigation
     const params=useParams<{username:string}>()
 
     // it is the zod validation that the user enter the valid data before submitting of the form
     // it is the frontend check user enter valid data or not
-    
-    
-    const form = useForm<z.infer<typeof verifyschema>>({
+const form = useForm<z.infer<typeof verifyschema>>({
   resolver: zodResolver(verifyschema),
   defaultValues: {
     code: "",
@@ -34,8 +28,8 @@ const VerifyAcccount=()=>
 
 
     // zod validation again check manually 
-   const onSubmit = async (data: z.infer<typeof verifyschema>) =>{
-    console.log(data.code);
+   const onSubmit = async (data: z.infer<typeof verifyschema>) =>
+    {
     try {
         const response=await axios.post(`/api/verifycode`,
             {

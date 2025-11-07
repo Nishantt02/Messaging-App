@@ -111,6 +111,3 @@ else {
   }
 }
 
-export async function GET() {
-  return NextResponse.json({ message: "Only POST method allowed" }, { status: 405 });
-}
