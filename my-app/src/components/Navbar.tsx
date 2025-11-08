@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react'; 
 // usession is used to get the information of the user from the session
 import { User } from 'next-auth';
-import { Button } from './button';
+import { Button } from './ui/button';
 function Navbar() {
   const { data: session } = useSession(); //get the data from the session
   const user : User = session?.user;// extract the user from the data.
