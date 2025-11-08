@@ -32,7 +32,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      
+        {/*  so while importing the navbar here in dashboard it show in dashboard */}
+      <Navbar/>
         {children}
        
         {/* <Toaster/> */}
