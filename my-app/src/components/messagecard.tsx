@@ -32,7 +32,7 @@ type MessagecardProps={
 
 
 const Mastercard=({message,onMessageDelete}:MessagecardProps)=>{
-    
+
 //  this is the method create for the delete of the message 
  // get the string 
 
@@ -81,7 +81,3 @@ const Mastercard=({message,onMessageDelete}:MessagecardProps)=>{
     )
 }
 export default Mastercard
-
-function onMessagedelete(response: any) {
-    throw new Error("Function not implemented.")
-}

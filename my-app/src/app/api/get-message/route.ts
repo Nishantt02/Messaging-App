@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 export async function GET(request:Request) {
     await dbconnect();
     const session= await getServerSession(authOptions); //get the session and data
-    const user=session?.user //fetch the data from session
+    const user=session?.user //fetch the loginuser data from session
     if(!session || !user){
         return Response.json({
             message:"user not found"

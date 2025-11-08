@@ -1,0 +1,47 @@
+import dbconnect from "@/lib/dbconnect";
+import UserModel from "@/lib/Models/User";
+import { getServerSession } from "next-auth"; // used to access user from session
+import { authOptions } from "../../auth/[...nextauth]/option";
+
+ export async function DELETE(request:Request,{params}:{params:{messageid:string}}) // this is the dynamic routing
+ {
+    const messageid=params.messageid;  // get the messgeid from the params dynamic routing
+    const session= await getServerSession(authOptions); // get the session from authOption
+    const user=session?.user // get the loginuser data from the session
+    if(!session || !user){
+        return Response.json({
+            success:false,
+            message:'user not found'
+        },{status:401})
+    }
+await dbconnect();
+    try {
+        
+        const updateresult=await UserModel.updateOne(
+            {_id:user._id} , // here used to find the user on basis of the _id 
+
+            {$pull:{messages:{_id:messageid}}}   
+            //detele the message on the basis of the 
+            // id by using mongodb pull opertion
+
+        ) 
+                console.log(updateresult);
+
+        if(!updateresult){
+            return Response.json({
+                success:false,
+                message:"result not updated"
+            },{status:401})
+        }
+        return Response.json({
+            success:true,
+            message:"message deleted"
+        },{status:201})
+    } catch (error) {
+        console.log("error in code",error)
+        return Response.json({
+            success:false,
+            message:'Internal server error'
+        } ,{status:500})
+    }
+ }
