@@ -8,7 +8,7 @@ export async function POST(request:Request){
     await dbconnect();
     const session=await getServerSession(authOptions); // here get the session
     
-     const user=session?.user  // get the user data from the session
+     const user=session?.user  // get the loginuser data from the session
      if(!session || !session.user){
         return Response.json({
             success:false,
@@ -16,7 +16,7 @@ export async function POST(request:Request){
         },
         {status:401})
      }
-     const userId=user._id || user.id; // get the userid from the user
+     const userId=user._id || user.id; // get the userid from the user._id
      const{acceptingMessages}=await request.json();// from the frontend data recieve
 
      try {
@@ -68,7 +68,7 @@ export async function GET(request:Request){
         {status:401})
      }
      const userId=user._id || user.id; // get the userid from the user
-      const founduser=await UserModel.findById(userId)
+    const founduser=await UserModel.findById(userId) //find the user from the userid
      try {
         // find the user by userid
        

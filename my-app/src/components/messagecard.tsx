@@ -35,7 +35,6 @@ const Mastercard=({message,onMessageDelete}:MessagecardProps)=>{
 
 //  this is the method create for the delete of the message 
  // get the string 
-
  const HandledeleteConfirm=async()=>{
     try {
          const response=await axios.delete(`/api/delete-message/${message._id}`)

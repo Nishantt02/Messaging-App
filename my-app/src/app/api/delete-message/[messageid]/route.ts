@@ -5,6 +5,7 @@ import { authOptions } from "../../auth/[...nextauth]/option";
 
  export async function DELETE(request:Request,{params}:{params:{messageid:string}}) // this is the dynamic routing
  {
+    await dbconnect();
     const messageid=params.messageid;  // get the messgeid from the params dynamic routing
     const session= await getServerSession(authOptions); // get the session from authOption
     const user=session?.user // get the loginuser data from the session
@@ -14,7 +15,7 @@ import { authOptions } from "../../auth/[...nextauth]/option";
             message:'user not found'
         },{status:401})
     }
-await dbconnect();
+
     try {
         
         const updateresult=await UserModel.updateOne(
@@ -35,7 +36,7 @@ await dbconnect();
         }
         return Response.json({
             success:true,
-            message:"message deleted"
+            message:"message deleted successfully"
         },{status:201})
     } catch (error) {
         console.log("error in code",error)
