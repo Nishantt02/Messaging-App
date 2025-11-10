@@ -1,5 +1,4 @@
 "use client"
-
 import { useCallback, useEffect, useState } from "react"
 import { Message } from "@/lib/Models/User"
 import { toast } from 'sonner';
@@ -34,8 +33,6 @@ const form=useForm({
 })
 
 const{watch,register,setValue}=form;
-// const acceptmessage=watch('isAcceptingMessage')
-// const acceptmessage = watch('isAcceptingMessage')
 const acceptmessage = watch("isAcceptingMessage")
 
 
@@ -44,7 +41,6 @@ const fetchAcceptmessage=useCallback(async()=>{
   setloading(true);
   try {
     const response=await axios.get(`/api/accept-message`)
-    // setValue('acceptmessage',response.data.isAcceptingMessages)
     setValue('isAcceptingMessage', response.data.isAcceptingMessages)
     toast.success(response.data.message)
   } catch (error) {
@@ -56,13 +52,14 @@ const fetchAcceptmessage=useCallback(async()=>{
     setloading(false);
   }
 },[setValue])
-// it is the POST request for fetching of the message
 
+
+// this is the request for the get message from the user
 const fetchmessage=useCallback(async()=>{
 try {
   setloading(true);
-  const response=await axios.get(`/api/accept-message`)
-  setmessages(response.data.message|| [])
+  const response=await axios.get(`/api/get-message`)
+  setmessages(response.data.messages|| [])
   toast.success(response.data.message)
 } catch (error) {
       const axiosError=error as AxiosError<ApiResponse>
@@ -91,7 +88,6 @@ const HandleswitchChange = async () => {
     const response = await axios.post(`/api/accept-message`, {
       acceptmessage: !acceptmessage,
     });
-    // setValue("isAcceptingMessage", !acceptmessage);
     setValue("isAcceptingMessage", !acceptmessage); 
     toast.success(response.data.message);
   } catch (error) {
@@ -102,35 +98,6 @@ const HandleswitchChange = async () => {
     setisswitching(false);
   }
 };
-
-// handle switch change 
-// const HandleswitchChange=async()=>{
-// try {
-//   const response=await axios.post(`/api/accept-message`,{
-//     acceptmessage:!acceptmessage
-//   })
-//   // setValue('acceptmessage',!acceptmessage)
-//   setValue('acceptmessage',!acceptmessage)
-
-//   toast.success(response.data.message)
- 
-// } catch (error) {
-//    const axiosError=error as AxiosError<ApiResponse>
-//       let errormessage=axiosError.response?.data.message
-//       toast.error(errormessage);
-// }
-// }
-// const{username}=session?.user
-// const baseurl=`${window.location.protocol}//${window.location.host}`
-// const profileurl=`${baseurl}/u/${username}`
-
-// const copyToClipboard=()=>{
-//   navigator.clipboard.writeText(profileurl);
-//   toast.success('url copy to clipboard')
-// }
-// if(!session || !session.user){
-//   return <>login agian</>
-// }
 
 const username = session?.user?.username;
   const [profileUrl, setProfileUrl] = useState("");
@@ -146,6 +113,9 @@ const username = session?.user?.username;
     navigator.clipboard.writeText(profileUrl);
     toast.success("URL copied to clipboard");
   };
+  if(!session || !session.user){
+  return <>login agian</>
+}
 
 return (
     <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
@@ -163,20 +133,6 @@ return (
           <Button onClick={copyToClipboard}>Copy</Button>
         </div>
       </div>
-
-      {/* <div className="mb-4">
-        <Switch
-          {...register('isAcceptingMessage')}
-          checked={acceptmessage}
-          onCheckedChange={HandleswitchChange}
-          disabled={isswitching}
-        />
-        <span className="ml-2">
-          Accept Messages: {acceptmessage ? 'On' : 'Off'}
-        </span>
-      </div> */}
-
-  
 
 <Switch
   {...register("isAcceptingMessage")}

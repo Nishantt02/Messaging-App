@@ -20,6 +20,7 @@ export async function POST(request:Request){
      const{acceptingMessages}=await request.json();// from the frontend data recieve
 
      try {
+        // here it update the user it will accepted the msg or not
         const updateUser=await UserModel.findByIdAndUpdate(
             userId,
             {
