@@ -3,10 +3,11 @@ import UserModel from "@/lib/Models/User";
 import { getServerSession } from "next-auth"; // used to access user from session
 import { authOptions } from "../../auth/[...nextauth]/option";
 
- export async function DELETE(request:Request,{params}:{params:{messageid:string}}) // this is the dynamic routing
+ export async function DELETE(request:Request,
+    context: { params: Promise<{ messageid: string }> } ) // this is the dynamic routing
  {
     await dbconnect();
-    const messageid=params.messageid;  // get the messgeid from the params dynamic routing
+    const{messageid}=await context.params  // get the messgeid from the params dynamic routing
     const session= await getServerSession(authOptions); // get the session from authOption
     const user=session?.user // get the loginuser data from the session
     if(!session || !user){
@@ -28,11 +29,12 @@ import { authOptions } from "../../auth/[...nextauth]/option";
         ) 
                 console.log(updateresult);
 
-        if(!updateresult){
+        if(updateresult.modifiedCount===0){
             return Response.json({
-                success:false,
-                message:"result not updated"
-            },{status:401})
+                sucess:false,
+                message:" not found or already deleted"
+            },{status:404})
+
         }
         return Response.json({
             success:true,

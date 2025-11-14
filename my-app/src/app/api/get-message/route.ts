@@ -9,12 +9,18 @@ export async function GET(request:Request) {
     await dbconnect();
     const session= await getServerSession(authOptions); //get the session and data
     const user=session?.user //fetch the loginuser data from session
+    
+    console.log("session",session)
     if(!session || !user){
         return Response.json({
             message:"user not found"
         },{status:404})
     }
     const userid= new mongoose.Types.ObjectId(user._id) //convert id into mongoose object id
+    console.log(userid)
+    const checkUser = await UserModel.findById(userid);
+console.log("Found user in DB:", checkUser);
+
     try {
         const user = await UserModel.aggregate([
       { $match: { _id: userid } }, //Pick your box (your user).
