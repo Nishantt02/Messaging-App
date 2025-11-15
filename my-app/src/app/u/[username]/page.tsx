@@ -27,7 +27,8 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 
 const initialMessageString =
-  "What's your favorite movie?||Do you have any pets?||What's your dream job?";
+
+  "What's your favorite movie?||If you could relive one happy memory, which one would it be?|| What’s something small that made you smile today||Do you have any pets?||What's your dream job?";
 const specialChar = "||";
 
 const parseStringMessages = (messageString: string): string[] => {
@@ -60,7 +61,6 @@ const Page = () => {
     isLoading: isSuggestLoading,
     error,
   } = useCompletion({
-    // api: "/api/suggest-message",
     initialCompletion: initialMessageString,
   });
 
@@ -100,13 +100,7 @@ const Page = () => {
     }
   };
 
-  const fetchSuggestedMessages = async () => {
-    try {
-      await complete("");
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-    }
-  };
+  
 
   return (
     <div className="container mx-auto my-8 p-6 bg-white rounded max-w-4xl">
