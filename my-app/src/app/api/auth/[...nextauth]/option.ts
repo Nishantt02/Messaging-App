@@ -1,9 +1,9 @@
+
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import dbConnect from '@/lib/dbConnect';
 import UserModel from '../../../../models/User';
-
 
 // for the nextauth you must have folder structure /api/auth/[..nextauth]  and create the two files in it option.ts and route.ts
 // it is the most complex for the authroziation require both email and password 
