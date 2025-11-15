@@ -1,5 +1,5 @@
 "use client"
-import { verifyschema } from '@/Schema/Verifyschema';
+import { verifyschema } from '@/schema/Verifyschema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useParams } from 'next/navigation';  // use to extract the data from the dynamic url
 import React from 'react'
@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { Toaster,toast } from 'sonner';
 import * as z from 'zod';
 import axios, { AxiosError } from 'axios';
-import { ApiResponse } from '@/Types/Apiresponse';
+import { ApiResponse } from '@/types/Apiresponse';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';

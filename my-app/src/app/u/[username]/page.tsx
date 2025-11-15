@@ -3,11 +3,11 @@
 
 import React, { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { messageschema } from "@/Schema/MessageSchema";
+import { messageschema } from "@/schema/MessageSchema";
 import * as z from "zod";
 import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
-import { ApiResponse } from "@/Types/Apiresponse";
+import { ApiResponse } from "@/types/Apiresponse";
 import { useCompletion } from "@ai-sdk/react";
 import {
   Form,

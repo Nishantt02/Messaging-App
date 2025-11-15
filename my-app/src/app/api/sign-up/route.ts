@@ -2,7 +2,7 @@
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "../../../models/User";
 import bcrypt from "bcryptjs"; 
-import { sendVerificationEmail } from "@/Helper/SendEmail";
+import { sendVerificationEmail } from "@/helper/SendEmail";
 import { NextResponse } from "next/server"; // correct way to send response in Next.js app router
 
 

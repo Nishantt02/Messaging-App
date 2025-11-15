@@ -1,6 +1,6 @@
 
 import nodemailer from "nodemailer";
-import { ApiResponse } from "@/Types/Apiresponse";
+import { ApiResponse } from "@/types/Apiresponse";
 import { renderVerificationEmail } from "@/lib/render-email";
 
 export async function sendVerificationEmail(

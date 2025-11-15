@@ -1,6 +1,6 @@
 "use client";
 import { Form, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { signInschema } from "@/Schema/Signin";
+import { signInschema } from "@/schema/Signin";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import React from "react";

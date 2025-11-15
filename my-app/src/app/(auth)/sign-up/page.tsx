@@ -8,8 +8,8 @@ import { SetStateAction, useEffect, useState } from "react"
 import { useRouter } from 'next/navigation';
 import { useDebounceCallback } from 'usehooks-ts'
 import { toast } from 'sonner';
-import { signupSchema } from "@/Schema/Signup"
-import { ApiResponse } from "@/Types/Apiresponse"
+import { signupSchema } from "@/schema/Signup"
+import { ApiResponse } from "@/types/Apiresponse"
 import axios, { AxiosError } from "axios"
 import { Form, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import {Input} from "@/components/ui/input"
