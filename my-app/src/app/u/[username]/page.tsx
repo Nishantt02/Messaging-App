@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { messageschema } from "@/schema/MessageSchema";
+import { messageSchema } from "@/schema/MessageSchema";
 import * as z from "zod";
 import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
@@ -48,7 +48,7 @@ const Page = () => {
 
   // zod valudation for the messageschema
   const form = useForm({
-    resolver: zodResolver(messageschema),
+    resolver: zodResolver(messageSchema),
     defaultValues: {
       content: "",
     },
@@ -73,7 +73,7 @@ const Page = () => {
   };
 
   //  Send message to backend
-  const OnSubmit = async (data: z.infer<typeof messageschema>) => {
+  const OnSubmit = async (data: z.infer<typeof messageSchema>) => {
     if (!username) {
       toast.error("Username not found in URL");
       return;
