@@ -1,5 +1,5 @@
 
-import dbconnect from "@/lib/dbConnect";
+import dbConnect from "@/lib/dbConnect";
 import UserModel from "../../../models/User";
 import bcrypt from "bcryptjs"; 
 import { sendVerificationEmail } from "@/Helper/SendEmail";
@@ -7,7 +7,7 @@ import { NextResponse } from "next/server"; // correct way to send response in N
 
 
 export async function POST(request: Request) {
-  await dbconnect();
+  await dbConnect();
 
   try {
     const { username, email, password } = await request.json();

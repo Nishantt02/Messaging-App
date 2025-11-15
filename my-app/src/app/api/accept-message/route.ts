@@ -1,11 +1,11 @@
 import { getServerSession } from "next-auth"; // used to access user from session
-import dbconnect from "@/lib/dbConnect";
+import dbConnect from "@/lib/dbConnect";
 import UserModel from "../../../models/User";
 import { authOptions } from "../auth/[...nextauth]/option";
 
 // post request and the main purpose of this code is to enable and disable of accepting message
 export async function POST(request:Request){
-    await dbconnect();
+    await dbConnect();
     const session=await getServerSession(authOptions); // here get the session
     
      const user=session?.user  // get the loginuser data from the session

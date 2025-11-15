@@ -1,12 +1,12 @@
 
-import dbconnect from "@/lib/dbConnect";
 import UserModel from "../../../models/User";
+import dbConnect from "@/lib/dbConnect";
 
 export async function POST(request: Request) 
 {
 
   // Connect to the database
-  await dbconnect();
+  await dbConnect();
 
   try {
     // frontend required the username and code from the fronted

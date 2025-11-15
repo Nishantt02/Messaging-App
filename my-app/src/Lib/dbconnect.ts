@@ -7,7 +7,7 @@ const connection:ConnectionObject={
 
 }
 
-async function dbconnect():Promise<void>{
+async function dbConnect():Promise<void>{
     if(connection.isConnected)
     {
         console.log("already connected to the database")
@@ -25,4 +25,4 @@ async function dbconnect():Promise<void>{
     }
 }
 
-export default dbconnect;
+export default dbConnect;

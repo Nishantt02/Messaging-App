@@ -1,12 +1,12 @@
 import { getServerSession } from "next-auth"; // used to access user from session
-import dbconnect from "@/lib/dbConnect";
+import dbConnect from "@/lib/dbConnect";
 import UserModel from "../../../models/User";
 import { authOptions } from "../auth/[...nextauth]/option";
 import mongoose from "mongoose";
 
 //main purpose of this request is to get the messages of the loginned user in reverse ordrer new first
 export async function GET(request:Request) {
-    await dbconnect();
+    await dbConnect();
     const session= await getServerSession(authOptions); //get the session and data
     const user=session?.user //fetch the loginuser data from session
     

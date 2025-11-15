@@ -1,9 +1,9 @@
-import dbconnect from "@/lib/dbConnect";
+import dbConnect from "@/lib/dbConnect";
 import UserModel from "../../../models/User";
 import {Message} from '../../../models/User'
 
 export async function POST(request:Request) {
-    await dbconnect();
+    await dbConnect();
 // we can easily send the msg even if the user is not logged in.
 const{username,content}=await request.json();
 try {
