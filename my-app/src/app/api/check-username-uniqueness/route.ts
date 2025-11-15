@@ -1,5 +1,5 @@
 import dbconnect from "@/lib/dbconnect";
-import UserModel from "@/lib/Models/User";
+import UserModel from "../../../models/User";
 import {z} from "zod";
 import { usernamevalidation } from "@/Schema/Signup";
 

@@ -1,9 +1,10 @@
 
 import dbconnect from "@/lib/dbconnect";
-import UserModel from "@/lib/Models/User";
+import UserModel from "../../../models/User";
 
 export async function POST(request: Request) 
 {
+
   // Connect to the database
   await dbconnect();
 
@@ -17,6 +18,7 @@ export async function POST(request: Request)
       return Response.json(
         { success: false, message: 'User not found' },
         { status: 404 }
+
       );
     }
 

@@ -188,7 +188,7 @@
 
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import { Message } from "@/lib/Models/User";
+import { Message } from "../../../models/User";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";

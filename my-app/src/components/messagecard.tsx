@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card"
 import {Button} from '@/components/ui/button'
 import {toast} from 'sonner'
-import { Message } from "@/lib/Models/User"
+import { Message } from "../models/User"
 import axios,{AxiosError} from "axios"
 import dayjs from 'dayjs';
 import {
